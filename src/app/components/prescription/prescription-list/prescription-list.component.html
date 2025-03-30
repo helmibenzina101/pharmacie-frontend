@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="header">
+    <h2>Prescriptions</h2>
+    <button *ngIf="canAccess()" mat-raised-button color="primary" (click)="openAddDialog()">
+      <mat-icon>add</mat-icon> Add Prescription
+    </button>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="prescriptions" class="mat-elevation-z8">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+      </ng-container>
+
+      <!-- Patient Name Column -->
+      <ng-container matColumnDef="patientName">
+        <th mat-header-cell *matHeaderCellDef>Patient</th>
+        <td mat-cell *matCellDef="let element">{{element.patient?.fullName || 'N/A'}}</td>
+      </ng-container>
+
+      <!-- Medecin Name Column -->
+      <ng-container matColumnDef="medecinName">
+        <th mat-header-cell *matHeaderCellDef>Medecin</th>
+        <td mat-cell *matCellDef="let element">{{element.medecin?.fullName || 'N/A'}}</td>
+      </ng-container>
+
+      <!-- Pharmacist Name Column -->
+      <ng-container matColumnDef="pharmacistName">
+        <th mat-header-cell *matHeaderCellDef>Pharmacist</th>
+        <td mat-cell *matCellDef="let element">{{element.pharmacist?.fullName || 'N/A'}}</td>
+      </ng-container>
+
+      <!-- Date Issued Column -->
+      <ng-container matColumnDef="dateIssued">
+        <th mat-header-cell *matHeaderCellDef>Date Issued</th>
+        <td mat-cell *matCellDef="let element">{{element.dateIssued | date:'mediumDate'}}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button *ngIf="canAccess()" mat-icon-button color="primary" (click)="openEditDialog(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button *ngIf="canAccess()" mat-icon-button color="warn" (click)="deletePrescription(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 768px) {
+  .mat-toolbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px 16px;
+
+    button {
+      margin: 4px;
+    }
+  }
+}

@@ -1,0 +1,75 @@
+<div class="home-container">
+  <mat-card class="welcome-card">
+    <mat-card-header>
+      <mat-card-title>Welcome to Pharmacy Management System</mat-card-title>
+      <mat-card-subtitle *ngIf="authService.isAuthenticated()">
+        You're logged in as: {{ authService.getUserRole() | titlecase }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div *ngIf="authService.isAuthenticated()" class="quick-links">
+        <h3>Quick Access</h3>
+        <div class="links-grid">
+          <ng-container [ngSwitch]="authService.getUserRole()">
+            <ng-container *ngSwitchCase="'medecin'">
+              <button mat-raised-button routerLink="/medecins" color="primary">
+                <mat-icon>medical_services</mat-icon>
+                Doctors
+              </button>
+              <button mat-raised-button routerLink="/patients" color="primary">
+                <mat-icon>personal_injury</mat-icon>
+                Patients
+              </button>
+              <button mat-raised-button routerLink="/medications" color="primary">
+                <mat-icon>medication</mat-icon>
+                Medications
+              </button>
+              <button mat-raised-button routerLink="/pharmacists" color="primary">
+                <mat-icon>local_pharmacy</mat-icon>
+                Pharmacists
+              </button>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'master'">
+              <button mat-raised-button routerLink="/medecins" color="primary">
+                <mat-icon>medical_services</mat-icon>
+                Doctors
+              </button>
+              <button mat-raised-button routerLink="/medications" color="primary">
+                <mat-icon>medication</mat-icon>
+                Medications
+              </button>
+              <button mat-raised-button routerLink="/patients" color="primary">
+                <mat-icon>personal_injury</mat-icon>
+                Patients
+              </button>
+              <button mat-raised-button routerLink="/pharmacists" color="primary">
+                <mat-icon>local_pharmacy</mat-icon>
+                Pharmacists
+              </button>
+              <button mat-raised-button routerLink="/prescriptions" color="accent">
+                <mat-icon>receipt_long</mat-icon>
+                Prescriptions
+              </button>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+
+      <div *ngIf="!authService.isAuthenticated()" class="auth-prompts">
+        <p>Please login or register to access the system</p>
+        <div class="auth-buttons">
+          <button mat-raised-button routerLink="/login" color="primary">
+            <mat-icon>login</mat-icon>
+            Login
+          </button>
+          <button mat-raised-button routerLink="/register" color="accent">
+            <mat-icon>person_add</mat-icon>
+            Register
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

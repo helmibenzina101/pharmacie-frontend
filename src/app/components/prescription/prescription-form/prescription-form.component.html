@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>{{isEditMode ? 'Edit' : 'Add'}} Prescription</h2>
+<mat-dialog-content>
+  <form [formGroup]="prescriptionForm">
+    <!-- Patient Selection -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Patient</mat-label>
+      <mat-select formControlName="patientId" required>
+        <mat-option *ngFor="let patient of patients" [value]="patient.id">
+          {{patient.fullName}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="prescriptionForm.get('patientId')?.hasError('required')">
+        Patient is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Medecin Selection -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Doctor</mat-label>
+      <mat-select formControlName="medecinId" required>
+        <mat-option *ngFor="let medecin of medecins" [value]="medecin.id">
+          {{medecin.fullName}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="prescriptionForm.get('medecinId')?.hasError('required')">
+        Doctor is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Pharmacist Selection -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Pharmacist</mat-label>
+      <mat-select formControlName="pharmacistId" required>
+        <mat-option *ngFor="let pharmacist of pharmacists" [value]="pharmacist.id">
+          {{pharmacist.fullName}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="prescriptionForm.get('pharmacistId')?.hasError('required')">
+        Pharmacist is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Date Issued -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Date Issued</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dateIssued" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="prescriptionForm.get('dateIssued')?.hasError('required')">
+        Date is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Medications Multi-Select -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Medications</mat-label>
+      <mat-select formControlName="medications" multiple required>
+        <mat-option *ngFor="let medication of medications" [value]="medication.id">
+          {{medication.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="prescriptionForm.get('medications')?.hasError('required')">
+        At least one medication is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()"
+          [disabled]="prescriptionForm.invalid">
+    {{isEditMode ? 'Update' : 'Save'}}
+  </button>
+</mat-dialog-actions>
