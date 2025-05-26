@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(userData: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/auth/register`, userData);
+    return this.http.post(`${environment.apiUrl}/account/register`, userData);
   }
 
   getToken(): string | null {

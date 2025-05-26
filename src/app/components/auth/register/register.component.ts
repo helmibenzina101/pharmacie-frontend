@@ -56,8 +56,8 @@ export class RegisterComponent {
       role: ['', Validators.required],
       password: ['', [
         Validators.required, 
-        Validators.minLength(6),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/)
+        Validators.minLength(6)
+        // Pattern validation removed
       ]],
       confirmPassword: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
@@ -84,7 +84,7 @@ export class RegisterComponent {
     }
     if (control.errors['pattern']) {
       if (controlName === 'phoneNumber') return 'Phone number must be 10 digits';
-      if (controlName === 'password') return 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
+      // Password pattern error message removed
     }
     if (control.errors['minlength']) return 'Password must be at least 6 characters';
     if (this.registerForm.errors?.['passwordMismatch'] && controlName === 'confirmPassword') {

@@ -26,7 +26,7 @@ import { AuthService } from '../../services/auth.service';
         <a mat-button routerLink="/prescriptions">Prescriptions</a>
         <a mat-button routerLink="/medications">Medications</a>
         <a mat-button routerLink="/patients">Patients</a>
-        <a mat-button routerLink="/doctors">Doctors</a>
+        <a mat-button routerLink="/medecins">Doctors</a>
         <a mat-button routerLink="/pharmacists">Pharmacists</a>
       </ng-container>
 

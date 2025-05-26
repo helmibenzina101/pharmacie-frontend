@@ -28,6 +28,11 @@ export class RoleGuard implements CanActivate {
       return false;
     }
 
+    // Explicitly allow medecin role to access medecins route
+    if (route.routeConfig?.path === 'medecins') {
+      return true;
+    }
+
     return true;
   }
 }

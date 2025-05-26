@@ -8,6 +8,28 @@
     </mat-card-header>
 
     <mat-card-content>
+      <!-- Dashboard charts for master role -->
+      <div *ngIf="authService.getUserRole() === 'master'" class="dashboard-charts">
+        <h3>Analytics Dashboard</h3>
+        <div class="charts-grid">
+          <mat-card class="chart-card">
+            <mat-card-title>Prescriptions per Doctor</mat-card-title>
+            <canvas id="doctorChart"></canvas>
+          </mat-card>
+          
+          <mat-card class="chart-card">
+            <mat-card-title>Prescriptions per Medication</mat-card-title>
+            <canvas id="medicationChart"></canvas>
+          </mat-card>
+          
+          <mat-card class="chart-card">
+            <mat-card-title>Prescriptions per Pharmacy</mat-card-title>
+            <canvas id="pharmacyChart"></canvas>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Existing quick links section -->
       <div *ngIf="authService.isAuthenticated()" class="quick-links">
         <h3>Quick Access</h3>
         <div class="links-grid">
@@ -57,6 +79,7 @@
         </div>
       </div>
 
+      <!-- Existing auth prompts section -->
       <div *ngIf="!authService.isAuthenticated()" class="auth-prompts">
         <p>Please login or register to access the system</p>
         <div class="auth-buttons">
